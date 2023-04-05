@@ -29,7 +29,7 @@ __author__ = "Kirill Ignatyev"
 __copyright__ = "Copyright (c) 2023, Kirill Ignatyev"
 __license__ = "MIT"
 __status__ = "Development"
-__version__ = "1.0"
+__version__ = "1.1"
 
 import json
 from datetime import date
@@ -151,15 +151,19 @@ class WildBerriesParser:
         for card in self.product_cards:
             url = (f"https://product-order-qnt.wildberries.ru/by-nm/"
                    f"?nm={card['Артикул']}")
-            response = requests.get(url, headers=self.headers).json()
-            card['Продано'] = response[0]['qnt']
+            try:
+                response = requests.get(url, headers=self.headers).json()
+                card['Продано'] = response[0]['qnt']
+            except requests.ConnectTimeout:
+                card['Продано'] = 'нет данных'
             print(f"Собрано карточек: {self.product_cards.index(card) + 1}"
                   f" из {len(self.product_cards)}")
 
     def save_to_excel(self, file_name: str) -> str:
         """Save the parsed data in xlsx and return its path."""
         data = pd.DataFrame(self.product_cards)
-        result_path = f"{path.join(self.directory, file_name)}.xlsx"
+        result_path = (f"{path.join(self.directory, file_name)}_"
+                       f"{self.run_date.strftime('%Y-%m-%d')}.xlsx")
         writer = pd.ExcelWriter(result_path)
         data.to_excel(writer, 'data', index=False)
         writer.close()
