@@ -1,40 +1,47 @@
-# Парсер Вайлдбериз
+# WildBerries Parser
 
-## Что это?
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-Этот написанный на питоне скрипт собирает информацию о товарах на сайте маркетплейса Вайлдбериз и сохраняет данные в формате xlsx.
+## Overview
+The WildBerries Parser is a Python script that allows you to collect information on items from the [Wildberries](https://wildberries.ru) website and save it into an xlsx file. The parser provides two modes: scanning items in a specific directory of the marketplace or parsing all items in the search results based on a given keyword. It collects various data from each item, including the link, ID, name, brand name, regular price, discounted price, rating, number of reviews, and total sales.
 
-## Как это работает?
+## Features
+- Retrieve item data from Wildberries based on categories or search keywords
+- Extract information such as link, ID, name, brand, pricing, rating, reviews, and sales
+- Save the collected data in xlsx format for further analysis
 
-Парсер работает в 2 режимах:
-1. со целой категорией сразу. Для этого вам нужно либо ввести название категории (в точности, как она называется на странице категории на сайте маркетплейса, например: "Мужские кеды и кроссовки" или "Книги для изучения иностранных языков"), либо полную ссылку на категорию (например: "https://www.wildberries.ru/catalog/obuv/muzhskaya/kedy-i-krossovki" или "https://www.wildberries.ru/catalog/knigi/nehudozhestvennaya-literatura/izuchenie-inostrannyh-yazykov");
-2. с товарами в выдаче Вайлдбериз по поисковому запросу.
+## Installation
+1. Clone this repository to your local machine.
+2. Navigate to the project directory.
 
-Парсер собирает следующие данные:
-* ссылку на товар,
-* артикул,
-* наименование,
-* название поставщика,
-* код поставщика,
-* цену без скидки,
-* текущую цену со скидкой,
-* рейтинг товара,
-* количество отзывов,
-* общие продажи за время существования карточки (с округлением до 50 в меньшую сторону).
+## Prerequisites
+- Python 3.x
+- Requests library (`pip install requests`)
+- Pandas library (`pip install pandas`)
 
-## Как этим пользоваться?
+## Usage
+1. Open a terminal or command prompt.
+2. Navigate to the project directory.
+3. Run the script using the following command:
+`python wbparser.py`
+4. Follow the on-screen instructions to choose the desired parsing mode and provide the necessary input.
 
-Можете загрузить этот репозиторий и запустить код на своем компьютере. Для работы потребуется установленный питон (например, 3.11.2), актуальные необходимые библиотеки в requirements.txt.
+## Examples
+To parse a specific category:
+- Choose the parsing mode for a category.
+- Enter the category name or URL.
+- The script will retrieve all products in the category, collect sales data, and save the parsed data to an xlsx file.
 
-## Дополнительная информация
+To parse by keywords:
+- Choose the parsing mode for keywords.
+- Enter the search query.
+- The script will retrieve all products in the search results, collect sales data, and save the parsed data to an xlsx file.
 
-Этот скрипт был вдохновлен проектом Тимерлана Налимова (https://github.com/Timur1991). Отличия моей версии:
-1. ООП (это поможет мне развивать парсер дальше в соответствии с задумкой);
-2. обработка каталога в json более глубокая из-за рекурсии (разница на текущий момент около 200 подкатегорий);
-3. можно ввести не только ссылку на категорию, но и ее название;
-4. можно искать товары по ключевым словам;
-5. дополнительно собираются данные о продажах.
+## Contributing
+Contributions are welcome! If you find any bugs or have suggestions for improvements, please open an issue or submit a pull request.
 
-## Лицензия
+## License
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
-Парсер распространяется под лицензией MIT.
+## Acknowledgements
+Special thanks to [Timerlan Nalimov](https://github.com/Timur1991) for inspiring this project with his [initial parser](https://github.com/Timur1991/project_wildberries). I appreciate his work and its contribution to the development of this parser.
