@@ -29,7 +29,7 @@ __author__ = "Kirill Ignatyev"
 __copyright__ = "Copyright (c) 2023, Kirill Ignatyev"
 __license__ = "MIT"
 __status__ = "Development"
-__version__ = "1.1"
+__version__ = "1.2"
 
 import json
 from datetime import date
@@ -62,7 +62,8 @@ class WildBerriesParser:
         if (not path.exists(local_catalogue_path)
                 or date.fromtimestamp(int(path.getmtime(local_catalogue_path)))
                 > self.run_date):
-            url = 'https://www.wildberries.ru/webapi/menu/main-menu-ru-ru.json'
+            url = ('https://static-basket-01.wb.ru/vol0/data/'
+                   'main-menu-ru-ru-v2.json')
             response = requests.get(url, headers=self.headers).json()
             with open(local_catalogue_path, 'w', encoding='UTF-8') as my_file:
                 json.dump(response, my_file, indent=2, ensure_ascii=False)
