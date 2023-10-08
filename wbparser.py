@@ -59,7 +59,7 @@ __author__ = "Kirill Ignatyev"
 __copyright__ = "Copyright (c) 2023, Kirill Ignatyev"
 __license__ = "MIT"
 __status__ = "Development"
-__version__ = "1.2"
+__version__ = "1.3"
 
 import json
 from datetime import date
@@ -287,9 +287,8 @@ class WildBerriesParser:
         for page in range(1, 101):
             print(f"Загружаю товары со страницы {page}")
             url = (f"https://catalog.wb.ru/catalog/{category_data[1]}/"
-                   f"catalog?appType=1&curr=rub"
-                   f"&dest=-1075831,-77677,-398551,12358499&page={page}"
-                   f"&reg=0&sort=popular&spp=0&{category_data[2]}")
+                   f"catalog?appType=1&{category_data[2]}&curr=rub"
+                   f"&dest=-1257786&page={page}&sort=popular&spp=24")
             if self.add_data_from_page(url):
                 break
 
@@ -362,11 +361,9 @@ class WildBerriesParser:
         for page in range(1, 101):
             print(f"Загружаю товары со страницы {page}")
             url = (f"https://search.wb.ru/exactmatch/ru/common/v4/search?"
-                   f"appType=1&curr=rub"
-                   f"&dest=-1029256,-102269,-2162196,-1257786"
-                   f"&page={page}&pricemarginCoeff=1.0"
-                   f"&query={'%20'.join(key_word.split())}]&reg=0"
-                   f"&resultset=catalog&sort=popular&spp=0")
+                   f"appType=1&curr=rub&dest=-1257786&page={page}"
+                   f"&query={'%20'.join(key_word.split())}&resultset=catalog"
+                   f"&sort=popular&spp=24&suppressSpellcheck=false")
             if self.add_data_from_page(url):
                 break
 
