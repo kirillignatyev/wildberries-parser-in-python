@@ -311,7 +311,10 @@ class WildBerriesParser:
                    f"?nm={card['Артикул']}")
             try:
                 response = requests.get(url, headers=self.headers).json()
-                card['Продано'] = response[0]['qnt']
+                if response == []:
+                    card['Продано'] = 'неизвестно'
+                else:
+                    card['Продано'] = response[0]['qnt']
             except requests.ConnectTimeout:
                 card['Продано'] = 'нет данных'
             print(f"Собрано карточек: {self.product_cards.index(card) + 1}"
